@@ -46,13 +46,9 @@ RUN echo '#!/bin/bash' > /tmp/setup.sh && \
     echo "ls -l" >> /tmp/setup.sh && \
     echo "cat pyproject.toml" >> /tmp/setup.sh && \
     echo "pip install -e .[test]" >> /tmp/setup.sh && \
-    echo "python -c \"import llm_claude_3; print('Import successful')\"" >> /tmp/setup.sh && \
+    echo "python -c \"import llm_claude_3; import llm; import anthropic\"" >> /tmp/setup.sh && \
     chmod +x /tmp/setup.sh && \
     /tmp/setup.sh
-
-# Create user root
-RUN useradd -m -s /bin/bash root
-USER root
 
 # Switch back to vscode user for development
 USER vscode
