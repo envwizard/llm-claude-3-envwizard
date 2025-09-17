@@ -44,7 +44,7 @@ RUN echo '#!/bin/bash' > /tmp/setup.sh && \
     echo "cat pyproject.toml" >> /tmp/setup.sh && \
     echo "cat README.md" >> /tmp/setup.sh && \
     echo "pip install -e .[test]" >> /tmp/setup.sh && \
-    echo "python -c \"import llm_claude_3\"" >> /tmp/setup.sh && \
+    echo "python -c \"import llm_claude_3; print(llm_claude_3.__file__)\"" >> /tmp/setup.sh && \
     chmod +x /tmp/setup.sh && \
     /tmp/setup.sh
 
