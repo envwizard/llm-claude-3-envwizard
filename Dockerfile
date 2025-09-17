@@ -46,7 +46,7 @@ RUN echo '#!/bin/bash' > /tmp/setup.sh && \
     echo "ls -l" >> /tmp/setup.sh && \
     echo "cat pyproject.toml" >> /tmp/setup.sh && \
     echo "pip install -e .[test]" >> /tmp/setup.sh && \
-    echo "python -c \"import llm_claude_3; import llm; import anthropic\"" >> /tmp/setup.sh && \
+    echo "python -c \"import llm_claude_3; import llm; import anthropic; import pytest; import pytest_asyncio; import pytest_recording\"" >> /tmp/setup.sh && \
     chmod +x /tmp/setup.sh && \
     /tmp/setup.sh
 
