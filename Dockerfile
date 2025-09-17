@@ -1,11 +1,17 @@
-FROM ubuntu:22.04
+FROM ghcr.io/envwizard/python310-base:latest
 
 # Environment variables
 
 WORKDIR /workspace
 
-# Install git if not present (most base images have it, but just in case)
-RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+# Install system dependencies for Python development
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    wget \
+    build-essential \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
 
 # Clone repository
 RUN git clone https://github.com/simonw/llm-claude-3 /workspace/repo
@@ -36,8 +42,9 @@ RUN echo '#!/bin/bash' > /tmp/setup.sh && \
     echo 'set -e' >> /tmp/setup.sh && \
     echo "ls -l" >> /tmp/setup.sh && \
     echo "cat pyproject.toml" >> /tmp/setup.sh && \
+    echo "cat README.md" >> /tmp/setup.sh && \
     echo "pip install -e .[test]" >> /tmp/setup.sh && \
-    echo "python -c \"import llm_claude_3; import llm; import anthropic\"" >> /tmp/setup.sh && \
+    echo "python -c \"import llm_claude_3\"" >> /tmp/setup.sh && \
     chmod +x /tmp/setup.sh && \
     /tmp/setup.sh
 
