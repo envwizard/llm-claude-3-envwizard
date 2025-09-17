@@ -23,6 +23,5 @@
   "portsAttributes": {},
   "remoteEnv": {},
   "shutdownAction": "stopContainer",
-  "postCreateCommand": "/usr/local/bin/copy-repo.sh",
-  "remoteUser": "root"
+  "postCreateCommand": "/usr/local/bin/copy-repo.sh"
 }
