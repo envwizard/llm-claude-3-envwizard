@@ -1,4 +1,4 @@
-FROM ghcr.io/envwizard/python310-base:latest
+FROM ghcr.io/envwizard/python310-base:latest@sha256:df62016190ed8b9655a9da4cc253e729f2117cffe9fef5cba8c1dfd0ff74149a
 
 # Environment variables
 
@@ -42,9 +42,8 @@ RUN echo '#!/bin/bash' > /tmp/setup.sh && \
     echo 'set -e' >> /tmp/setup.sh && \
     echo "ls -l" >> /tmp/setup.sh && \
     echo "cat pyproject.toml" >> /tmp/setup.sh && \
-    echo "cat README.md" >> /tmp/setup.sh && \
     echo "pip install -e .[test]" >> /tmp/setup.sh && \
-    echo "python -c \"import llm_claude_3; print(llm_claude_3.__file__)\"" >> /tmp/setup.sh && \
+    echo "python -c \"import llm_claude_3; import pytest; print('Imports successful')\"" >> /tmp/setup.sh && \
     chmod +x /tmp/setup.sh && \
     /tmp/setup.sh
 
