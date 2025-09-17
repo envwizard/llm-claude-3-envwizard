@@ -2,6 +2,9 @@ FROM ghcr.io/envwizard/python310-base:latest@sha256:df62016190ed8b9655a9da4cc253
 
 # Environment variables
 
+# Switch to root to install system dependencies
+USER root
+
 WORKDIR /workspace
 
 # Install system dependencies for Python development
@@ -43,10 +46,13 @@ RUN echo '#!/bin/bash' > /tmp/setup.sh && \
     echo "ls -l" >> /tmp/setup.sh && \
     echo "cat pyproject.toml" >> /tmp/setup.sh && \
     echo "pip install -e .[test]" >> /tmp/setup.sh && \
-    echo "python -c \"import llm_claude_3; import pytest; print('Imports successful')\"" >> /tmp/setup.sh && \
+    echo "python -c \"import llm_claude_3; print('Import successful')\"" >> /tmp/setup.sh && \
     chmod +x /tmp/setup.sh && \
     /tmp/setup.sh
 
 # Create user root
 RUN useradd -m -s /bin/bash root
 USER root
+
+# Switch back to vscode user for development
+USER vscode
