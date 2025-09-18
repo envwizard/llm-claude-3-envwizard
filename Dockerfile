@@ -47,7 +47,8 @@ RUN echo '#!/bin/bash' > /tmp/setup.sh && \
     echo "cat pyproject.toml" >> /tmp/setup.sh && \
     echo "cat README.md" >> /tmp/setup.sh && \
     echo "pip install -e .[test]" >> /tmp/setup.sh && \
-    echo "PYTHON_EXEC=\$(poetry env info --path 2>/dev/null)/bin/python || PYTHON_EXEC=python; \$PYTHON_EXEC -c \"import llm_claude_3; import anthropic; import llm; import pytest; import pytest_recording; import pytest_asyncio\"" >> /tmp/setup.sh && \
+    echo "python -c \"import llm_claude_3; import anthropic; import llm; import pytest; import pytest_recording; import pytest_asyncio\"" >> /tmp/setup.sh && \
+    echo "python --version" >> /tmp/setup.sh && \
     chmod +x /tmp/setup.sh && \
     /tmp/setup.sh
 
